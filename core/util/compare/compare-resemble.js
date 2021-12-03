@@ -1,4 +1,4 @@
-const resemble = require('@mirzazeyrek/node-resemble-js');
+const resemble = require('resemblejs');
 
 module.exports = function (referencePath, testPath, misMatchThreshold, resembleOutputSettings, requireSameDimensions) {
   return new Promise(function (resolve, reject) {
