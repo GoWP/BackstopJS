@@ -9,17 +9,8 @@ module.exports = function (testPath, data) {
   const failedDiffStream = fs.createWriteStream(failedDiffFilename);
   const ext = failedDiffFilename.substring(failedDiffFilename.lastIndexOf('.') + 1);
 
-  if (ext === 'png') {
-    const storageStream = data.getDiffImage()
-      .pack()
-      .pipe(failedDiffStream);
-    return streamToPromise(storageStream, failedDiffFilename);
-  }
-
-  if (ext === 'jpg' || ext === 'jpeg') {
-    fs.writeFileSync(failedDiffFilename, data.getDiffImageAsJPEG(85));
-    return Promise.resolve(failedDiffFilename);
-  }
+  fs.writeFileSync(failedDiffFilename, data.getBuffer());
+  return Promise.resolve(failedDiffFilename);
 };
 
 function getFailedDiffFilename (testPath) {
